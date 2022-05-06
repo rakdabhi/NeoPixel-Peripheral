@@ -1,0 +1,884 @@
+-- Altera Memory Initialization File (MIF)
+
+DEPTH = 2048;
+WIDTH = 16;
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+
+CONTENT
+  BEGIN
+    [000..7FF] : 0000;  -- Default to NOP
+
+           000 : 98BC;  -- 	OUT		CLEAR_ALL; clean slate
+           001 : 831E;  -- 	CALL	WaitUpdate
+           002 : B801;  -- 	LOADI	1
+           003 : 98B6;  -- 	OUT		AUTO_INC ; set auto inc to 1 
+           004 : 0B31;  -- 	LOAD	BLUE16
+           005 : 132C;  -- 	STORE	REG1 ; store color data
+           006 : BFFF;  -- 	LOADI	-1
+           007 : 132D;  -- 	STORE	REG2 ; store loop counter
+           008 : B800;  -- 	LOADI	0
+           009 : 98B0;  -- 	OUT		PXL_ADDR1 ; starting address 
+           00A : 0B2D;  -- 	LOAD	REG2 ; increment counter 
+           00B : 6801;  -- 	ADDI	1
+           00C : 132D;  -- 	STORE	REG2
+           00D : 0B2C;  -- 	LOAD	REG1
+           00E : 98B2;  -- 	OUT		RGB_16 ; set color
+           00F : 6FFF;  -- 	ADDI	-1 ; decrease blue intensity
+           010 : 132C;  -- 	STORE	REG1  ; color data
+           011 : B801;  -- 	LOADI	1
+           012 : 8317;  -- 	CALL	DelayAC
+           013 : 0B2D;  -- 	LOAD	REG2
+           014 : 6FE1;  -- 	ADDI	-31
+           015 : 300A;  -- 	JNEG	OneJumpPos ; loop continue condition
+           016 : BFFF;  -- 	LOADI	-1
+           017 : 98B6;  -- 	OUT		AUTO_INC ; set auto inc to -1
+           018 : 0B31;  -- 	LOAD	BLUE16
+           019 : 132C;  -- 	STORE	REG1 ; store color data
+           01A : BFFF;  -- 	LOADI	-1
+           01B : 132D;  -- 	STORE	REG2 ; store loop counter
+           01C : B8BF;  -- 	LOADI	191
+           01D : 98B0;  -- 	OUT		PXL_ADDR1 ; starting address 
+           01E : 0B2D;  -- 	LOAD	REG2 ; increment counter 
+           01F : 6801;  -- 	ADDI	1
+           020 : 132D;  -- 	STORE	REG2
+           021 : 0B2C;  -- 	LOAD	REG1
+           022 : 98B2;  -- 	OUT		RGB_16 ; set color
+           023 : 6FFF;  -- 	ADDI	-1 ; decrease blue intensity
+           024 : 132C;  -- 	STORE	REG1  ; color data
+           025 : B801;  -- 	LOADI	1
+           026 : 8317;  -- 	CALL	DelayAC
+           027 : 0B2D;  -- 	LOAD	REG2
+           028 : 6FE1;  -- 	ADDI	-31
+           029 : 301E;  -- 	JNEG	OneJumpNeg ; loop continue condition
+           02A : 8321;  -- 	CALL	WaitSwitchTurnPositive
+           02B : 98BC;  -- 	OUT		CLEAR_ALL; clean slate
+           02C : 831E;  -- 	CALL	WaitUpdate
+           02D : B802;  -- 	LOADI	2
+           02E : 98B6;  -- 	OUT		AUTO_INC ; set auto inc to 2
+           02F : 0B31;  -- 	LOAD	BLUE16
+           030 : 132C;  -- 	STORE	REG1 ; store color data
+           031 : BFFF;  -- 	LOADI	-1
+           032 : 132D;  -- 	STORE	REG2 ; store loop counter
+           033 : B800;  -- 	LOADI	0
+           034 : 98B0;  -- 	OUT		PXL_ADDR1 ; starting address 
+           035 : 0B2D;  -- 	LOAD	REG2
+           036 : 6801;  -- 	ADDI	1
+           037 : 132D;  -- 	STORE	REG2
+           038 : 0B2C;  -- 	LOAD	REG1
+           039 : 98B2;  -- 	OUT		RGB_16 ; set color
+           03A : 6FFF;  -- 	ADDI	-1 ; decrease blue intensity
+           03B : 132C;  -- 	STORE	REG1
+           03C : B801;  -- 	LOADI	1
+           03D : 8317;  -- 	CALL	DelayAC
+           03E : 0B2D;  -- 	LOAD	REG2
+           03F : 6FE1;  -- 	ADDI	-31
+           040 : 3035;  -- 	JNEG	TwoJumpPos ; loop continue condition
+           041 : BFFE;  -- 	LOADI	-2
+           042 : 98B6;  -- 	OUT		AUTO_INC ; set auto inc to -2
+           043 : 0B31;  -- 	LOAD	BLUE16
+           044 : 132C;  -- 	STORE	REG1 ; store color data
+           045 : BFFF;  -- 	LOADI	-1
+           046 : 132D;  -- 	STORE	REG2 ; store loop counter
+           047 : B8BF;  -- 	LOADI	191
+           048 : 98B0;  -- 	OUT		PXL_ADDR1 ; starting address 
+           049 : 0B2D;  -- 	LOAD	REG2
+           04A : 6801;  -- 	ADDI	1
+           04B : 132D;  -- 	STORE	REG2
+           04C : 0B2C;  -- 	LOAD	REG1
+           04D : 98B2;  -- 	OUT		RGB_16 ; set color
+           04E : 6FFF;  -- 	ADDI	-1 ; decrease blue intensity
+           04F : 132C;  -- 	STORE	REG1
+           050 : B801;  -- 	LOADI	1
+           051 : 8317;  -- 	CALL	DelayAC
+           052 : 0B2D;  -- 	LOAD	REG2
+           053 : 6FE1;  -- 	ADDI	-31
+           054 : 3049;  -- 	JNEG	TwoJumpNeg ; loop continue condition
+           055 : 8326;  -- 	CALL	WaitSwitchTurnZero
+           056 : 98BC;  -- 	OUT		CLEAR_ALL; clean slate
+           057 : 831E;  -- 	CALL	WaitUpdate
+           058 : B800;  -- 	LOADI	0					; SET RANGE TO FIRST ROW
+           059 : 98B0;  -- 	OUT		PXL_ADDR1
+           05A : B81F;  -- 	LOADI	31
+           05B : 98B1;  -- 	OUT		PXL_ADDR2
+           05C : 0B38;  -- 	LOAD	BLUEL_16		;16-BIT COLOR blue
+           05D : 98B8;  -- 	OUT		SET_RANGE
+           05E : 831E;  -- 	CALL	WaitUpdate
+           05F : B80F;  -- 	LOADI	15
+           060 : 8317;  -- 	CALL	DelayAC
+           061 : B820;  -- 	LOADI	32					; SET RANGE TO SECOND ROW
+           062 : 98B0;  -- 	OUT 	PXL_ADDR1
+           063 : B83F;  -- 	LOADI	63
+           064 : 98B1;  -- 	OUT 	PXL_ADDR2
+           065 : B801;  -- 	LOADI	1
+           066 : 98B9;  -- 	OUT		X
+           067 : B800;  -- 	LOADI	&B00000000				; load lowest blue
+           068 : 98B4;  -- 	OUT		RED_24					
+           069 : B800;  -- 	LOADI	&B00000000
+           06A : 98B3;  -- 	OUT		GREEN_24
+           06B : B801;  -- 	LOADI	&B00000001				
+           06C : 98BE;  -- 	OUT		SET_RANGE_X_BLUE_24		;24-BIT COLOR RANGE SET
+           06D : B80F;  -- 	LOADI	15
+           06E : 8317;  -- 	CALL	DelayAC
+           06F : B840;  -- 	LOADI	64					; SET RANGE TO THIRD ROW
+           070 : 98B0;  -- 	OUT 	PXL_ADDR1
+           071 : B85F;  -- 	LOADI	95
+           072 : 98B1;  -- 	OUT 	PXL_ADDR2
+           073 : 0B37;  -- 	LOAD	GREENL_16		;16-BIT COLOR GREEN
+           074 : 98B8;  -- 	OUT		SET_RANGE
+           075 : B80F;  -- 	LOADI	15
+           076 : 8317;  -- 	CALL	DelayAC
+           077 : B860;  -- 	LOADI	96					; SET RANGE TO FOURTH ROW
+           078 : 98B0;  -- 	OUT 	PXL_ADDR1
+           079 : B87F;  -- 	LOADI	127
+           07A : 98B1;  -- 	OUT 	PXL_ADDR2
+           07B : B801;  -- 	LOADI	1
+           07C : 98B9;  -- 	OUT		X
+           07D : B800;  -- 	LOADI	&B00000000
+           07E : 98B4;  -- 	OUT		RED_24					;24-BIT GREEN
+           07F : B801;  -- 	LOADI	&B00000001
+           080 : 98B3;  -- 	OUT		GREEN_24
+           081 : B800;  -- 	LOADI	&B00000000
+           082 : 98BE;  -- 	OUT		SET_RANGE_X_BLUE_24		;24-BIT COLOR RANGE SET
+           083 : B80F;  -- 	LOADI	15
+           084 : 8317;  -- 	CALL	DelayAC
+           085 : B880;  -- 	LOADI	128					; SET RANGE TO FIFTH ROW
+           086 : 98B0;  -- 	OUT 	PXL_ADDR1
+           087 : B89F;  -- 	LOADI	159
+           088 : 98B1;  -- 	OUT 	PXL_ADDR2
+           089 : 0B36;  -- 	LOAD	REDL_16			;16-BIT COLOR green blue
+           08A : 98B8;  -- 	OUT		SET_RANGE
+           08B : B80F;  -- 	LOADI	15
+           08C : 8317;  -- 	CALL	DelayAC
+           08D : B8A0;  -- 	LOADI	160					; SET RANGE TO SIXTH ROW
+           08E : 98B0;  -- 	OUT 	PXL_ADDR1
+           08F : B8BF;  -- 	LOADI	191
+           090 : 98B1;  -- 	OUT 	PXL_ADDR2
+           091 : B801;  -- 	LOADI	1
+           092 : 98B9;  -- 	OUT		X
+           093 : B801;  -- 	LOADI	&B00000001
+           094 : 98B4;  -- 	OUT		RED_24					;24-BIT green and blue
+           095 : B800;  -- 	LOADI	&B00000000
+           096 : 98B3;  -- 	OUT		GREEN_24
+           097 : B800;  -- 	LOADI 	&B00000000
+           098 : 98BE;  -- 	OUT		SET_RANGE_X_BLUE_24		;24-BIT COLOR RANGE SET
+           099 : 8321;  -- 	CALL	WaitSwitchTurnPositive
+           09A : 98BC;  -- 	OUT		CLEAR_ALL; clean slate
+           09B : 831E;  -- 	CALL	WaitUpdate
+           09C : B807;  -- 	LOADI	&B0000000000000111
+           09D : 132C;  -- 	STORE	REG1 ; store individual color data
+           09E : BFFF;  -- 	LOADI	-1
+           09F : 132D;  -- 	STORE	REG2 ; store loop counter
+           0A0 : 9000;  --     IN		Switches
+           0A1 : 40E3;  --     JZERO	SecFourEnd    
+           0A2 : 0B2D;  -- 	LOAD	REG2
+           0A3 : 1FFF;  -- 	ADD		-1
+           0A4 : 132D;  -- 	STORE	REG2
+           0A5 : 0B2E;  --     LOAD	REG3
+           0A6 : 98B7;  --     OUT		SET_ALL
+           0A7 : 831E;  --     CALL	WaitUpdate
+           0A8 : 0B2C;  --     LOAD	REG1
+           0A9 : 6FFF;  -- 	ADDI	-1	 
+           0AA : 132C;  -- 	STORE	REG1
+           0AB : B800;  --     LOADI	0
+           0AC : 132E;  --     STORE	REG3
+           0AD : 0B2C;  --     LOAD	REG1
+           0AE : 600B;  --     SHIFT	11
+           0AF : 532E;  --     OR		REG3
+           0B0 : 132E;  --     STORE	REG3
+           0B1 : 0B2C;  --     LOAD	REG1
+           0B2 : 6005;  --     SHIFT	5
+           0B3 : 532E;  --     OR		REG3
+           0B4 : 132E;  --     STORE	REG3
+           0B5 : 0B2C;  --     LOAD	REG1
+           0B6 : 532E;  --     OR		REG3
+           0B7 : 132E;  --     STORE	REG3
+           0B8 : B804;  --     LOADI	4
+           0B9 : 8317;  --     CALL	DelayAC ; 0.1 second delay
+           0BA : 0B2C;  --     LOAD	REG1
+           0BB : 40BF;  --     JZERO	IncreasingOuter
+           0BC : 0B2D;  --     LOAD	REG2
+           0BD : 6FF9;  --     ADDI	-7
+           0BE : 30A0;  --     JNEG	Decreasing
+           0BF : B800;  -- 	LOADI	0
+           0C0 : 132C;  -- 	STORE	REG1 ; store individual color data
+           0C1 : BFFF;  -- 	LOADI	-1
+           0C2 : 132D;  -- 	STORE	REG2 ; store loop counter
+           0C3 : 9000;  --     IN		Switches
+           0C4 : 40E3;  --     JZERO	SecFourEnd
+           0C5 : 0B2D;  -- 	LOAD	REG2
+           0C6 : 1FFF;  -- 	ADD		-1
+           0C7 : 132D;  -- 	STORE	REG2
+           0C8 : 0B2E;  --     LOAD	REG3
+           0C9 : 98B7;  --     OUT		SET_ALL
+           0CA : 831E;  --     CALL	WaitUpdate
+           0CB : 0B2C;  --     LOAD	REG1
+           0CC : 6801;  -- 	ADDI	1   
+           0CD : 132C;  -- 	STORE	REG1
+           0CE : B800;  --     LOADI	0
+           0CF : 132E;  --     STORE	REG3
+           0D0 : 0B2C;  --     LOAD	REG1
+           0D1 : 600B;  --     SHIFT	11
+           0D2 : 532E;  --     OR		REG3
+           0D3 : 132E;  --     STORE	REG3
+           0D4 : 0B2C;  --     LOAD	REG1
+           0D5 : 6005;  --     SHIFT	5
+           0D6 : 532E;  --     OR		REG3
+           0D7 : 132E;  --     STORE	REG3
+           0D8 : 0B2C;  --     LOAD	REG1
+           0D9 : 532E;  --     OR		REG3
+           0DA : 132E;  --     STORE	REG3
+           0DB : B804;  --     LOADI	4
+           0DC : 8317;  --     CALL	DelayAC ; 0.1 second delay
+           0DD : 0B2C;  --     LOAD	REG1
+           0DE : 6FF9;  --     ADDI	-7
+           0DF : 409C;  --     JZERO	DecreasingOuter
+           0E0 : 0B2D;  --     LOAD	REG2
+           0E1 : 6FF9;  --     ADDI	-7
+           0E2 : 30C3;  --     JNEG	Increasing
+           0E3 : 98BC;  --     OUT		CLEAR_ALL ; TEMP
+           0E4 : 8326;  --     CALL	WaitSwitchTurnZero
+           0E5 : B800;  -- 	LOADI	0
+           0E6 : 98B6;  -- 	OUT		AUTO_INC
+           0E7 : 98BC;  -- 	OUT 	CLEAR_ALL
+           0E8 : 831E;  -- 	CALL 	WaitUpdate
+           0E9 : B840;  -- 	LOADI 	64
+           0EA : 98B0;  -- 	OUT		PXL_ADDR1
+           0EB : B85F;  -- 	LOADI	95
+           0EC : 98B1;  -- 	OUT		PXL_ADDR2
+           0ED : B801;  -- 	LOADI	1
+           0EE : 8317;  -- 	CALL	DelayAC
+           0EF : 0B3A;  -- 	LOAD	pixColor
+           0F0 : 98B8;  -- 	OUT		SET_RANGE
+           0F1 : 831E;  -- 	CALL	WaitUpdate
+           0F2 : 0B3A;  -- 	LOAD	pixColor
+           0F3 : 6801;  -- 	ADDI	1
+           0F4 : 133A;  -- 	STORE	pixColor
+           0F5 : 90B2;  -- 	IN		RGB_16
+           0F6 : 9804;  -- 	OUT 	HEX0
+           0F7 : 9000;  -- 	IN		Switches
+           0F8 : 38FA;  -- 	JPOS	Exit
+           0F9 : 28ED;  -- 	JUMP	Loop
+           0FA : 98BC;  -- 	OUT		CLEAR_ALL
+           0FB : 831E;  -- 	CALL	WaitUpdate
+           0FC : 0B52;  -- 		LOAD	LOOPCOUNTER
+           0FD : 6801;  -- 		ADDI	1
+           0FE : 1352;  -- 		STORE	LOOPCOUNTER
+           0FF : 0B51;  -- 		LOAD	X_VALUE
+           100 : 98B9;  -- 		OUT		X
+           101 : 98BC;  -- 		OUT		CLEAR_ALL
+           102 : 831E;  -- 		CALL 	WaitUpdate
+           103 : 0B50;  -- 		LOAD 	COLOR
+           104 : 98BA;  -- 		OUT 	SET_ALL_X
+           105 : 831E;  -- 		CALL 	WaitUpdate ;wait for set all to finish
+           106 : B832;  -- 		LOADI 	50
+           107 : 8317;  -- 		CALL 	DelayAC 
+           108 : 0B50;  -- 		LOAD 	COLOR
+           109 : 6BE8;  -- 		ADDI 	1000
+           10A : 1350;  -- 		STORE 	COLOR
+           10B : 0B51;  -- 		LOAD 	X_VALUE
+           10C : 6FFA;  -- 		ADDI 	-6
+           10D : 410F;  -- 		JZERO 	SetOne ;max x value reached
+           10E : 3112;  -- 		JNEG 	IncXValue ;else keep incrementing
+           10F : B801;  -- 			LOADI 	1
+           110 : 1351;  -- 			STORE 	X_VALUE
+           111 : 2915;  -- 			JUMP 	CheckLoop
+           112 : 0B51;  -- 			LOAD 	X_VALUE
+           113 : 6801;  -- 			ADDI 	1
+           114 : 1351;  -- 			STORE 	X_VALUE
+           115 : 9000;  -- 			IN		Switches
+           116 : 4118;  -- 			JZERO	EXTRAVEGANT_SET_RANGE_X_DISPLAY
+           117 : 28FC;  -- 			JUMP	SetAllXLoop
+           118 : 98BC;  -- 	OUT		CLEAR_ALL
+           119 : 831E;  -- 	CALL	WaitUpdate
+           11A : 829C;  -- 	CALL	SET_RANGE_X_RGB1
+           11B : B80A;  -- 	LOADI	10
+           11C : 8317;  -- 	CALL	DelayAC
+           11D : 98BC;  -- 	OUT		CLEAR_ALL
+           11E : 831E;  -- 	CALL	WaitUpdate
+           11F : 82B4;  -- 	CALL	SET_RANGE_X_RGB2
+           120 : B80A;  -- 	LOADI	10
+           121 : 8317;  -- 	CALL	DelayAC
+           122 : 98BC;  -- 	OUT		CLEAR_ALL
+           123 : 831E;  -- 	CALL	WaitUpdate
+           124 : 82CC;  -- 	CALL	SET_RANGE_X_RGB3
+           125 : B80A;  -- 	LOADI	10
+           126 : 8317;  -- 	CALL	DelayAC
+           127 : 98BC;  -- 	OUT		CLEAR_ALL
+           128 : 831E;  -- 	CALL	WaitUpdate
+           129 : 82E4;  -- 	CALL	SET_RANGE_X_CY1
+           12A : B80A;  -- 	LOADI	10
+           12B : 8317;  -- 	CALL	DelayAC
+           12C : 98BC;  -- 	OUT		CLEAR_ALL
+           12D : 831E;  -- 	CALL	WaitUpdate
+           12E : 82F5;  -- 	CALL	SET_RANGE_X_CY2
+           12F : B80A;  -- 	LOADI	10
+           130 : 8317;  -- 	CALL	DelayAC
+           131 : 98BC;  -- 	OUT		CLEAR_ALL
+           132 : 831E;  -- 	CALL	WaitUpdate
+           133 : 8306;  -- 	CALL	SET_RANGE_X_CY3
+           134 : B80A;  -- 	LOADI	10
+           135 : 8317;  -- 	CALL	DelayAC
+           136 : 98BC;  -- 	OUT		CLEAR_ALL
+           137 : 831E;  -- 	CALL	WaitUpdate
+           138 : 829C;  -- 	CALL	SET_RANGE_X_RGB1
+           139 : 82B4;  -- 	CALL	SET_RANGE_X_RGB2
+           13A : 82CC;  -- 	CALL	SET_RANGE_X_RGB3
+           13B : B80A;  -- 	LOADI	10
+           13C : 8317;  -- 	CALL	DelayAC
+           13D : 98BC;  -- 	OUT		CLEAR_ALL
+           13E : 831E;  -- 	CALL	WaitUpdate
+           13F : 82E4;  -- 	CALL	SET_RANGE_X_CY1
+           140 : 82F5;  -- 	CALL	SET_RANGE_X_CY2
+           141 : 8306;  -- 	CALL	SET_RANGE_X_CY3
+           142 : B80A;  -- 	LOADI	10
+           143 : 8317;  -- 	CALL	DelayAC
+           144 : 98BC;  -- 	OUT		CLEAR_ALL
+           145 : 831E;  -- 	CALL	WaitUpdate
+           146 : 829C;  -- 	CALL	SET_RANGE_X_RGB1
+           147 : 82B4;  -- 	CALL	SET_RANGE_X_RGB2
+           148 : 82CC;  -- 	CALL	SET_RANGE_X_RGB3
+           149 : 82E4;  -- 	CALL	SET_RANGE_X_CY1
+           14A : 82F5;  -- 	CALL	SET_RANGE_X_CY2
+           14B : 8306;  -- 	CALL	SET_RANGE_X_CY3
+           14C : B80A;  -- 	LOADI	10
+           14D : 8317;  -- 	CALL	DelayAC
+           14E : 98BC;  -- 	OUT		CLEAR_ALL
+           14F : 831E;  -- 	CALL	WaitUpdate
+           150 : 9000;  -- 	IN		Switches
+           151 : 3953;  -- 	JPOS	PONG_DEMO
+           152 : 2918;  -- 	JUMP	EXTRAVEGANT_SET_RANGE_X_DISPLAY
+           153 : B800;  -- 	LOADI		0
+           154 : 98B6;  -- 	OUT			AUTO_INC
+           155 : 0B49;  -- 	LOAD		dimWhite
+           156 : 98B7;  -- 	OUT			SET_ALL
+           157 : 831E;  -- 	CALL		WaitUpdate
+           158 : 0B4B;  -- 	LOAD		redBall
+           159 : 134A;  -- 	STORE		ballColor
+           15A : 81D9;  -- 	CALL		SetBorders
+           15B : 0B40;  -- 	LOAD		yCoord
+           15C : 2347;  -- 	SUB			floor
+           15D : 4162;  -- 	JZERO		bounceBottom
+           15E : 0B40;  -- 	LOAD		yCoord
+           15F : 2348;  -- 	SUB			roof
+           160 : 4165;  -- 	JZERO		bounceTop
+           161 : 2968;  -- 	JUMP		HorizBounce
+           162 : B801;  -- 	LOADI		1
+           163 : 1342;  -- 	STORE		yDir
+           164 : 2968;  -- 	JUMP		HorizBounce
+           165 : BFFF;  -- 	LOADI		-1
+           166 : 1342;  -- 	STORE		yDir
+           167 : 2968;  -- 	JUMP		HorizBounce
+           168 : 0B3F;  -- 	LOAD		xCoord
+           169 : 2345;  -- 	SUB			leftSide
+           16A : 416F;  -- 	JZERO		bounceLeft
+           16B : 0B3F;  -- 	LOAD		xCoord
+           16C : 2346;  -- 	SUB			rightSide
+           16D : 4174;  -- 	JZERO		bounceRight
+           16E : 2979;  -- 	JUMP		Move
+           16F : B801;  -- 	LOADI		1
+           170 : 1343;  -- 	STORE		xDir
+           171 : 0B4B;  -- 	LOAD		redBall
+           172 : 134A;  -- 	STORE		ballColor
+           173 : 2979;  -- 	JUMP		Move
+           174 : BFFF;  -- 	LOADI		-1
+           175 : 1343;  -- 	STORE		xDir
+           176 : 0B4D;  -- 	LOAD		blueBall
+           177 : 134A;  -- 	STORE		ballColor
+           178 : 2979;  -- 	JUMP		Move
+           179 : 0B3F;  -- 	LOAD		xCoord
+           17A : 1B43;  -- 	ADD			xDir
+           17B : 133F;  -- 	STORE		xCoord
+           17C : 0B40;  -- 	LOAD		yCoord
+           17D : 1B42;  -- 	ADD			yDir
+           17E : 1340;  -- 	STORE		yCoord
+           17F : 0B41;  -- 	LOAD		realPos
+           180 : 98B0;  -- 	OUT			PXL_ADDR1
+           181 : 0B49;  -- 	LOAD		dimWhite
+           182 : 98B2;  -- 	OUT			RGB_16
+           183 : 81B5;  -- 	CALL		FindRealPos
+           184 : 0B41;  -- 	LOAD		realPos
+           185 : 98B0;  -- 	OUT			PXL_ADDR1
+           186 : 0B4A;  -- 	LOAD		ballColor
+           187 : 98B2;  -- 	OUT			RGB_16
+           188 : 0B41;  -- 	LOAD		realPos
+           189 : 98B0;  -- 	OUT			PXL_ADDR1
+           18A : 90B2;  -- 	IN			RGB_16
+           18B : 9804;  -- 	OUT			Hex0
+           18C : 234D;  -- 	SUB			blueBall
+           18D : 418F;  -- 	JZERO		moveLeft
+           18E : 29A0;  -- 	JUMP		MoveRight
+           18F : 0B40;  -- 	LOAD	yCoord
+           190 : 233C;  -- 	SUB		lPaddlePos
+           191 : 3194;  -- 	JNEG	moveLDown
+           192 : 3999;  -- 	JPOS	moveLUp
+           193 : 41B1;  -- 	JZERO	doneMoving
+           194 : 0B3C;  -- 	LOAD	lPaddlePos
+           195 : 6FFF;  -- 	ADDI	-1
+           196 : 41B1;  -- 	JZERO	doneMoving
+           197 : 133C;  -- 	STORE	lPaddlePos
+           198 : 29B1;  -- 	JUMP	doneMoving
+           199 : 0B3C;  -- 	LOAD	lPaddlePos
+           19A : 6801;  -- 	ADDI	1
+           19B : 6FFB;  -- 	ADDI	-5
+           19C : 41B1;  -- 	JZERO	doneMoving
+           19D : 6805;  -- 	ADDI	5
+           19E : 133C;  -- 	STORE	lPaddlePos
+           19F : 29B1;  -- 	JUMP	doneMoving
+           1A0 : 0B40;  -- 	LOAD	yCoord
+           1A1 : 233D;  -- 	SUB		rPaddlePos
+           1A2 : 31A5;  -- 	JNEG	moveRDown
+           1A3 : 39AA;  -- 	JPOS	moveRUp
+           1A4 : 41B1;  -- 	JZERO	doneMoving
+           1A5 : 0B3D;  -- 	LOAD	rPaddlePos
+           1A6 : 6FFF;  -- 	ADDI	-1
+           1A7 : 41B1;  -- 	JZERO	doneMoving
+           1A8 : 133D;  -- 	STORE	rPaddlePos
+           1A9 : 29B1;  -- 	JUMP	doneMoving
+           1AA : 0B3D;  -- 	LOAD	rPaddlePos
+           1AB : 6801;  -- 	ADDI	1
+           1AC : 6FFB;  -- 	ADDI	-5
+           1AD : 41B1;  -- 	JZERO	doneMoving
+           1AE : 6805;  -- 	ADDI	5
+           1AF : 133D;  -- 	STORE	rPaddlePos
+           1B0 : 29B1;  -- 	JUMP	doneMoving
+           1B1 : 81D9;  -- 	CALL		SetBorders
+           1B2 : B801;  -- 	LOADI		1
+           1B3 : 8317;  -- 	CALL		DelayAC
+           1B4 : 295B;  -- 	JUMP		Begin
+           1B5 : B800;  -- 	LOADI	0
+           1B6 : 1341;  -- 	STORE	realPos
+           1B7 : 0B40;  -- 	LOAD	yCoord
+           1B8 : 4B44;  -- 	AND		one
+           1B9 : 39CB;  -- 	JPOS	ODD
+           1BA : 29BB;  -- 	JUMP	EVEN
+           1BB : 0B40;  -- 	LOAD	yCoord
+           1BC : 133E;  -- 	STORE	tempCounter
+           1BD : 0B3E;  -- 	LOAD	tempCounter
+           1BE : 41C5;  -- 	JZERO	NextEVEN
+           1BF : 6FFF;  -- 	ADDI	-1
+           1C0 : 133E;  -- 	STORE	tempCounter
+           1C1 : 0B41;  -- 	LOAD	realPos
+           1C2 : 6820;  -- 	ADDI	32
+           1C3 : 1341;  -- 	STORE	realPos
+           1C4 : 29BD;  -- 	JUMP	MultEVEN
+           1C5 : 0B41;  -- 	LOAD	realPos
+           1C6 : 6820;  -- 	ADDI	32
+           1C7 : 233F;  -- 	SUB		xCoord
+           1C8 : 2344;  -- 	SUB		one
+           1C9 : 1341;  -- 	STORE	realPos
+           1CA : 29D8;  -- 	JUMP Finish
+           1CB : 0B40;  -- 	LOAD	yCoord
+           1CC : 133E;  -- 	STORE	tempCounter
+           1CD : 0B3E;  -- 	LOAD	tempCounter
+           1CE : 41D5;  -- 	JZERO	NextODD
+           1CF : 6FFF;  -- 	ADDI	-1
+           1D0 : 133E;  -- 	STORE	tempCounter
+           1D1 : 0B41;  -- 	LOAD	realPos
+           1D2 : 6820;  -- 	ADDI	32
+           1D3 : 1341;  -- 	STORE	realPos
+           1D4 : 29CD;  -- 	JUMP	MultODD
+           1D5 : 0B41;  -- 	LOAD	realPos
+           1D6 : 1B3F;  -- 	ADD		xCoord
+           1D7 : 1341;  -- 	STORE	realPos
+           1D8 : 8800;  -- 	RETURN
+           1D9 : 0B3C;  -- 	LOAD	lPaddlePos
+           1DA : 6FFF;  -- 	ADDI	-1
+           1DB : 41E2;  -- 	JZERO	BL
+           1DC : 6FFF;  -- 	ADDI	-1
+           1DD : 41E9;  -- 	JZERO	M1L
+           1DE : 6FFF;  -- 	ADDI	-1
+           1DF : 41F0;  -- 	JZERO	M2L
+           1E0 : 6FFF;  -- 	ADDI	-1
+           1E1 : 41F7;  -- 	JZERO	TL
+           1E2 : 8241;  -- 	CALL	L0
+           1E3 : 8246;  -- 	CALL	L1
+           1E4 : 824B;  -- 	CALL	L2
+           1E5 : 828C;  -- 	CALL	CL3
+           1E6 : 8291;  -- 	CALL	CL4
+           1E7 : 8296;  -- 	CALL	CL5
+           1E8 : 29FE;  -- 	JUMP	RightPad
+           1E9 : 827D;  -- 	CALL	CL0
+           1EA : 8246;  -- 	CALL	L1
+           1EB : 824B;  -- 	CALL	L2
+           1EC : 8250;  -- 	CALL	L3
+           1ED : 8291;  -- 	CALL	CL4
+           1EE : 8296;  -- 	CALL	CL5
+           1EF : 29FE;  -- 	JUMP	RightPad
+           1F0 : 827D;  -- 	CALL	CL0
+           1F1 : 8282;  -- 	CALL	CL1
+           1F2 : 824B;  -- 	CALL	L2
+           1F3 : 8250;  -- 	CALL	L3
+           1F4 : 8255;  -- 	CALL	L4
+           1F5 : 8296;  -- 	CALL	CL5
+           1F6 : 29FE;  -- 	JUMP	RightPad
+           1F7 : 827D;  -- 	CALL	CL0
+           1F8 : 8282;  -- 	CALL	CL1
+           1F9 : 8287;  -- 	CALL	CL2
+           1FA : 8250;  -- 	CALL	L3
+           1FB : 8255;  -- 	CALL	L4
+           1FC : 825A;  -- 	CALL	L5
+           1FD : 29FE;  -- 	JUMP	RightPad
+           1FE : 0B3D;  -- 	LOAD	rPaddlePos
+           1FF : 6FFF;  -- 	ADDI	-1
+           200 : 4207;  -- 	JZERO	BR
+           201 : 6FFF;  -- 	ADDI	-1
+           202 : 420E;  -- 	JZERO	M1R
+           203 : 6FFF;  -- 	ADDI	-1
+           204 : 4215;  -- 	JZERO	M2R
+           205 : 6FFF;  -- 	ADDI	-1
+           206 : 421C;  -- 	JZERO	TR
+           207 : 8223;  -- 	CALL	R0
+           208 : 8228;  -- 	CALL	R1
+           209 : 822D;  -- 	CALL	R2
+           20A : 826E;  -- 	CALL	CR3
+           20B : 8273;  -- 	CALL	CR4
+           20C : 8278;  -- 	CALL	CR5
+           20D : 8800;  -- 	RETURN
+           20E : 825F;  -- 	CALL	CR0
+           20F : 8228;  -- 	CALL	R1
+           210 : 822D;  -- 	CALL	R2
+           211 : 8232;  -- 	CALL	R3
+           212 : 8273;  -- 	CALL	CR4
+           213 : 8278;  -- 	CALL	CR5
+           214 : 8800;  -- 	RETURN
+           215 : 825F;  -- 	CALL	CR0
+           216 : 8264;  -- 	CALL	CR1
+           217 : 822D;  -- 	CALL	R2
+           218 : 8232;  -- 	CALL	R3
+           219 : 8237;  -- 	CALL	R4
+           21A : 8278;  -- 	CALL	CR5
+           21B : 8800;  -- 	RETURN
+           21C : 825F;  -- 	CALL	CR0
+           21D : 8264;  -- 	CALL	CR1
+           21E : 8269;  -- 	CALL	CR2
+           21F : 8232;  -- 	CALL	R3
+           220 : 8237;  -- 	CALL	R4
+           221 : 823C;  -- 	CALL	R5
+           222 : 8800;  -- 	RETURN
+           223 : B800;  -- 	LOADI	0
+           224 : 98B0;  -- 	OUT		PXL_ADDR1
+           225 : 0B4E;  -- 	LOAD	rightWall
+           226 : 98B2;  -- 	OUT		RGB_16
+           227 : 8800;  -- 	RETURN
+           228 : B83F;  -- 	LOADI	63
+           229 : 98B0;  -- 	OUT		PXL_ADDR1
+           22A : 0B4E;  -- 	LOAD	rightWall
+           22B : 98B2;  -- 	OUT		RGB_16
+           22C : 8800;  -- 	RETURN
+           22D : B840;  -- 	LOADI	64
+           22E : 98B0;  -- 	OUT		PXL_ADDR1
+           22F : 0B4E;  -- 	LOAD	rightWall
+           230 : 98B2;  -- 	OUT		RGB_16
+           231 : 8800;  -- 	RETURN
+           232 : B87F;  -- 	LOADI	127
+           233 : 98B0;  -- 	OUT		PXL_ADDR1
+           234 : 0B4E;  -- 	LOAD	rightWall
+           235 : 98B2;  -- 	OUT		RGB_16
+           236 : 8800;  -- 	RETURN
+           237 : B880;  -- 	LOADI	128
+           238 : 98B0;  -- 	OUT		PXL_ADDR1
+           239 : 0B4E;  -- 	LOAD	rightWall
+           23A : 98B2;  -- 	OUT		RGB_16
+           23B : 8800;  -- 	RETURN
+           23C : B8BF;  -- 	LOADI	191
+           23D : 98B0;  -- 	OUT		PXL_ADDR1
+           23E : 0B4E;  -- 	LOAD	rightWall
+           23F : 98B2;  -- 	OUT		RGB_16
+           240 : 8800;  -- 	RETURN
+           241 : B81F;  -- 	LOADI	31
+           242 : 98B0;  -- 	OUT		PXL_ADDR1
+           243 : 0B4C;  -- 	LOAD	leftWall
+           244 : 98B2;  -- 	OUT		RGB_16
+           245 : 8800;  -- 	RETURN
+           246 : B820;  -- 	LOADI	32
+           247 : 98B0;  -- 	OUT		PXL_ADDR1
+           248 : 0B4C;  -- 	LOAD	leftWall
+           249 : 98B2;  -- 	OUT		RGB_16
+           24A : 8800;  -- 	RETURN
+           24B : B85F;  -- 	LOADI	95
+           24C : 98B0;  -- 	OUT		PXL_ADDR1
+           24D : 0B4C;  -- 	LOAD	leftWall
+           24E : 98B2;  -- 	OUT		RGB_16
+           24F : 8800;  -- 	RETURN
+           250 : B860;  -- 	LOADI	96
+           251 : 98B0;  -- 	OUT		PXL_ADDR1
+           252 : 0B4C;  -- 	LOAD	leftWall
+           253 : 98B2;  -- 	OUT		RGB_16
+           254 : 8800;  -- 	RETURN
+           255 : B89F;  -- 	LOADI	159
+           256 : 98B0;  -- 	OUT		PXL_ADDR1
+           257 : 0B4C;  -- 	LOAD	leftWall
+           258 : 98B2;  -- 	OUT		RGB_16
+           259 : 8800;  -- 	RETURN
+           25A : B8A0;  -- 	LOADI	160
+           25B : 98B0;  -- 	OUT		PXL_ADDR1
+           25C : 0B4C;  -- 	LOAD	leftWall
+           25D : 98B2;  -- 	OUT		RGB_16
+           25E : 8800;  -- 	RETURN
+           25F : B800;  -- 	LOADI	0
+           260 : 98B0;  -- 	OUT		PXL_ADDR1
+           261 : 0B49;  -- 	LOAD	dimWhite
+           262 : 98B2;  -- 	OUT		RGB_16
+           263 : 8800;  -- 	RETURN
+           264 : B83F;  -- 	LOADI	63
+           265 : 98B0;  -- 	OUT		PXL_ADDR1
+           266 : 0B49;  -- 	LOAD	dimWhite
+           267 : 98B2;  -- 	OUT		RGB_16
+           268 : 8800;  -- 	RETURN
+           269 : B840;  -- 	LOADI	64
+           26A : 98B0;  -- 	OUT		PXL_ADDR1
+           26B : 0B49;  -- 	LOAD	dimWhite
+           26C : 98B2;  -- 	OUT		RGB_16
+           26D : 8800;  -- 	RETURN
+           26E : B87F;  -- 	LOADI	127
+           26F : 98B0;  -- 	OUT		PXL_ADDR1
+           270 : 0B49;  -- 	LOAD	dimWhite
+           271 : 98B2;  -- 	OUT		RGB_16
+           272 : 8800;  -- 	RETURN
+           273 : B880;  -- 	LOADI	128
+           274 : 98B0;  -- 	OUT		PXL_ADDR1
+           275 : 0B49;  -- 	LOAD	dimWhite
+           276 : 98B2;  -- 	OUT		RGB_16
+           277 : 8800;  -- 	RETURN
+           278 : B8BF;  -- 	LOADI	191
+           279 : 98B0;  -- 	OUT		PXL_ADDR1
+           27A : 0B49;  -- 	LOAD	dimWhite
+           27B : 98B2;  -- 	OUT		RGB_16
+           27C : 8800;  -- 	RETURN
+           27D : B81F;  -- 	LOADI	31
+           27E : 98B0;  -- 	OUT		PXL_ADDR1
+           27F : 0B49;  -- 	LOAD	dimWhite
+           280 : 98B2;  -- 	OUT		RGB_16
+           281 : 8800;  -- 	RETURN
+           282 : B820;  -- 	LOADI	32
+           283 : 98B0;  -- 	OUT		PXL_ADDR1
+           284 : 0B49;  -- 	LOAD	dimWhite
+           285 : 98B2;  -- 	OUT		RGB_16
+           286 : 8800;  -- 	RETURN
+           287 : B85F;  -- 	LOADI	95
+           288 : 98B0;  -- 	OUT		PXL_ADDR1
+           289 : 0B49;  -- 	LOAD	dimWhite
+           28A : 98B2;  -- 	OUT		RGB_16
+           28B : 8800;  -- 	RETURN
+           28C : B860;  -- 	LOADI	96
+           28D : 98B0;  -- 	OUT		PXL_ADDR1
+           28E : 0B49;  -- 	LOAD	dimWhite
+           28F : 98B2;  -- 	OUT		RGB_16
+           290 : 8800;  -- 	RETURN
+           291 : B89F;  -- 	LOADI	159
+           292 : 98B0;  -- 	OUT		PXL_ADDR1
+           293 : 0B49;  -- 	LOAD	dimWhite
+           294 : 98B2;  -- 	OUT		RGB_16
+           295 : 8800;  -- 	RETURN
+           296 : B8A0;  -- 	LOADI	160
+           297 : 98B0;  -- 	OUT		PXL_ADDR1
+           298 : 0B49;  -- 	LOAD	dimWhite
+           299 : 98B2;  -- 	OUT		RGB_16
+           29A : 8800;  -- 	RETURN
+           29B : 2A9B;  -- END: JUMP	END
+           29C : B803;  -- 	LOADI	3
+           29D : 98B9;  -- 	OUT		X
+           29E : B800;  -- 	LOADI	0
+           29F : 98B0;  -- 	OUT		PXL_ADDR1
+           2A0 : B81F;  -- 	LOADI	31
+           2A1 : 98B1;  -- 	OUT		PXL_ADDR2
+           2A2 : 0B5E;  -- 	LOAD	DIM_RED
+           2A3 : 98BB;  -- 	OUT		SET_RANGE_X
+           2A4 : 831E;  -- 	CALL	WaitUpdate
+           2A5 : B801;  -- 	LOADI	1
+           2A6 : 98B0;  -- 	OUT		PXL_ADDR1
+           2A7 : B81F;  -- 	LOADI	31
+           2A8 : 98B1;  -- 	OUT		PXL_ADDR2
+           2A9 : 0B5F;  -- 	LOAD	DIM_GREEN
+           2AA : 98BB;  -- 	OUT		SET_RANGE_X
+           2AB : 831E;  -- 	CALL	WaitUpdate
+           2AC : B802;  -- 	LOADI	2
+           2AD : 98B0;  -- 	OUT		PXL_ADDR1
+           2AE : B81F;  -- 	LOADI	31
+           2AF : 98B1;  -- 	OUT		PXL_ADDR2
+           2B0 : 0B60;  -- 	LOAD	DIM_BLUE
+           2B1 : 98BB;  -- 	OUT		SET_RANGE_X
+           2B2 : 831E;  -- 	CALL	WaitUpdate
+           2B3 : 8800;  -- 	RETURN
+           2B4 : B803;  -- 	LOADI	3
+           2B5 : 98B9;  -- 	OUT		X
+           2B6 : B840;  -- 	LOADI	64
+           2B7 : 98B0;  -- 	OUT		PXL_ADDR1
+           2B8 : B85F;  -- 	LOADI	95
+           2B9 : 98B1;  -- 	OUT		PXL_ADDR2
+           2BA : 0B5E;  -- 	LOAD	DIM_RED
+           2BB : 98BB;  -- 	OUT		SET_RANGE_X
+           2BC : 831E;  -- 	CALL	WaitUpdate
+           2BD : B841;  -- 	LOADI	65
+           2BE : 98B0;  -- 	OUT		PXL_ADDR1
+           2BF : B85F;  -- 	LOADI	95
+           2C0 : 98B1;  -- 	OUT		PXL_ADDR2
+           2C1 : 0B5F;  -- 	LOAD	DIM_GREEN
+           2C2 : 98BB;  -- 	OUT		SET_RANGE_X
+           2C3 : 831E;  -- 	CALL	WaitUpdate
+           2C4 : B842;  -- 	LOADI	66
+           2C5 : 98B0;  -- 	OUT		PXL_ADDR1
+           2C6 : B85F;  -- 	LOADI	95
+           2C7 : 98B1;  -- 	OUT		PXL_ADDR2
+           2C8 : 0B60;  -- 	LOAD	DIM_BLUE
+           2C9 : 98BB;  -- 	OUT		SET_RANGE_X
+           2CA : 831E;  -- 	CALL	WaitUpdate
+           2CB : 8800;  -- 	RETURN
+           2CC : B803;  -- 	LOADI	3
+           2CD : 98B9;  -- 	OUT		X
+           2CE : B880;  -- 	LOADI	128
+           2CF : 98B0;  -- 	OUT		PXL_ADDR1
+           2D0 : B89F;  -- 	LOADI	159
+           2D1 : 98B1;  -- 	OUT		PXL_ADDR2
+           2D2 : 0B5E;  -- 	LOAD	DIM_RED
+           2D3 : 98BB;  -- 	OUT		SET_RANGE_X
+           2D4 : 831E;  -- 	CALL	WaitUpdate
+           2D5 : B881;  -- 	LOADI	129
+           2D6 : 98B0;  -- 	OUT		PXL_ADDR1
+           2D7 : B89F;  -- 	LOADI	159
+           2D8 : 98B1;  -- 	OUT		PXL_ADDR2
+           2D9 : 0B5F;  -- 	LOAD	DIM_GREEN
+           2DA : 98BB;  -- 	OUT		SET_RANGE_X
+           2DB : 831E;  -- 	CALL	WaitUpdate
+           2DC : B882;  -- 	LOADI	130
+           2DD : 98B0;  -- 	OUT		PXL_ADDR1
+           2DE : B89F;  -- 	LOADI	159
+           2DF : 98B1;  -- 	OUT		PXL_ADDR2
+           2E0 : 0B60;  -- 	LOAD	DIM_BLUE
+           2E1 : 98BB;  -- 	OUT		SET_RANGE_X
+           2E2 : 831E;  -- 	CALL	WaitUpdate
+           2E3 : 8800;  -- 	RETURN
+           2E4 : B802;  -- 	LOADI	2
+           2E5 : 98B9;  -- 	OUT		X
+           2E6 : B820;  -- 	LOADI	32
+           2E7 : 98B0;  -- 	OUT		PXL_ADDR1
+           2E8 : B83F;  -- 	LOADI	63
+           2E9 : 98B1;  -- 	OUT		PXL_ADDR2
+           2EA : 0B61;  -- 	LOAD	DIM_YELLOW
+           2EB : 98BB;  -- 	OUT		SET_RANGE_X
+           2EC : 831E;  -- 	CALL	WaitUpdate
+           2ED : B821;  -- 	LOADI	33
+           2EE : 98B0;  -- 	OUT		PXL_ADDR1
+           2EF : B83F;  -- 	LOADI	63
+           2F0 : 98B1;  -- 	OUT		PXL_ADDR2
+           2F1 : 0B62;  -- 	LOAD	DIM_CYAN
+           2F2 : 98BB;  -- 	OUT		SET_RANGE_X
+           2F3 : 831E;  -- 	CALL	WaitUpdate
+           2F4 : 8800;  -- 	RETURN
+           2F5 : B802;  -- 	LOADI	2
+           2F6 : 98B9;  -- 	OUT		X
+           2F7 : B860;  -- 	LOADI	96
+           2F8 : 98B0;  -- 	OUT		PXL_ADDR1
+           2F9 : B87F;  -- 	LOADI	127
+           2FA : 98B1;  -- 	OUT		PXL_ADDR2
+           2FB : 0B61;  -- 	LOAD	DIM_YELLOW
+           2FC : 98BB;  -- 	OUT		SET_RANGE_X
+           2FD : 831E;  -- 	CALL	WaitUpdate
+           2FE : B861;  -- 	LOADI	97
+           2FF : 98B0;  -- 	OUT		PXL_ADDR1
+           300 : B87F;  -- 	LOADI	127
+           301 : 98B1;  -- 	OUT		PXL_ADDR2
+           302 : 0B62;  -- 	LOAD	DIM_CYAN
+           303 : 98BB;  -- 	OUT		SET_RANGE_X
+           304 : 831E;  -- 	CALL	WaitUpdate
+           305 : 8800;  -- 	RETURN
+           306 : B802;  -- 	LOADI	2
+           307 : 98B9;  -- 	OUT		X
+           308 : B8A0;  -- 	LOADI	160
+           309 : 98B0;  -- 	OUT		PXL_ADDR1
+           30A : B8BF;  -- 	LOADI	191
+           30B : 98B1;  -- 	OUT		PXL_ADDR2
+           30C : 0B61;  -- 	LOAD	DIM_YELLOW
+           30D : 98BB;  -- 	OUT		SET_RANGE_X
+           30E : 831E;  -- 	CALL	WaitUpdate
+           30F : B8A1;  -- 	LOADI	161
+           310 : 98B0;  -- 	OUT		PXL_ADDR1
+           311 : B8BF;  -- 	LOADI	191
+           312 : 98B1;  -- 	OUT		PXL_ADDR2
+           313 : 0B62;  -- 	LOAD	DIM_CYAN
+           314 : 98BB;  -- 	OUT		SET_RANGE_X
+           315 : 831E;  -- 	CALL	WaitUpdate
+           316 : 8800;  -- 	RETURN	
+           317 : 131D;  -- 	STORE  DelayTime   ; Save the desired delay
+           318 : 9802;  -- 	OUT    Timer       ; Reset the timer
+           319 : 9002;  -- 	IN     Timer       ; Get the current timer value
+           31A : 231D;  -- 	SUB    DelayTime
+           31B : 3319;  -- 	JNEG   WaitingLoop ; Repeat until timer = delay value
+           31C : 8800;  -- 	RETURN
+           31D : 0000;  -- DelayTime: DW 0
+           31E : 90BF;  -- 	IN		GET_BUSY
+           31F : 3B1E;  -- 	JPOS	WaitUpdate
+           320 : 8800;  -- 	RETURN
+           321 : 90BF;  -- 	IN    	GET_BUSY
+           322 : 3B21;  -- 	JPOS    WaitSwitchTurnPositive
+           323 : 9000;  -- 	IN		Switches
+           324 : 4321;  -- 	JZERO	WaitSwitchTurnPositive
+           325 : 8800;  -- 	RETURN
+           326 : 90BF;  -- 	IN    GET_BUSY
+           327 : 3B26;  -- 	JPOS    WaitSwitchTurnZero
+           328 : 9000;  -- 	IN		Switches
+           329 : 3B26;  -- 	JPOS	WaitSwitchTurnZero
+           32A : 3326;  -- 	JNEG	WaitSwitchTurnZero
+           32B : 8800;  -- 	RETURN
+           32C : 0000;  -- REG1:			DW 0
+           32D : 0000;  -- REG2:			DW 0
+           32E : 0000;  -- REG3:			DW 0
+           32F : F800;  -- RED16: 			DW &B1111100000000000
+           330 : 07E0;  -- GREEN16: 		DW &B0000011111100000
+           331 : 001F;  -- BLUE16: 		DW &B0000000000011111
+           332 : FFE0;  -- YELLOW16:		DW &B1111111111100000
+           333 : 03EF;  -- CYAN16:			DW &B0000001111101111
+           334 : 3807;  -- PURPLE16:		DW &B0011100000000111
+           335 : FFFF;  -- WHITE16: 		DW &B1111111111111111
+           336 : 0800;  -- REDL_16:		DW &B0000100000000000
+           337 : 0020;  -- GREENL_16:		DW &B0000000000100000
+           338 : 0001;  -- BLUEL_16:		DW &B0000000000000001
+           339 : 0001;  -- EIGHT_BIT_LOW:	DW &B00000001
+           33A : 0000;  -- pixColor:	DW 0
+           33B : 0000;  -- readColor:	DW 0
+           33C : 0003;  -- lPaddlePos:		DW 3
+           33D : 0003;  -- rPaddlePos:		DW 3
+           33E : 0000;  -- tempCounter:	DW 0
+           33F : 0010;  -- xCoord:			DW 16
+           340 : 0003;  -- yCoord:			DW 3
+           341 : 0050;  -- realPos:		DW 80
+           342 : 0001;  -- yDir:			DW 1
+           343 : 0001;  -- xDir:			DW 1
+           344 : 0001;  -- one:			DW 1
+           345 : 0001;  -- leftSide:		DW 1
+           346 : 001E;  -- rightSide:		DW 30
+           347 : 0000;  -- floor:			DW 0
+           348 : 0005;  -- roof:			DW 5
+           349 : 0841;  -- dimWhite:		DW &B0000100001000001
+           34A : 0080;  -- ballColor:		DW &B0000000010000000
+           34B : 2000;  -- redBall:		DW &B0010000000000000
+           34C : 1000;  -- leftWall:		DW &B0001000000000000
+           34D : 0007;  -- blueBall:		DW &B0000000000000111
+           34E : 0003;  -- rightWall:		DW &B0000000000000011
+           34F : 00FF;  -- EIGHT_BITS:		DW &B0000000011111111
+           350 : 0000;  -- COLOR:			DW 0
+           351 : 0001;  -- X_VALUE:		DW 1
+           352 : 0000;  -- LOOPCOUNTER: 	DW 0
+           353 : 0000;  -- RGB16_Color:	DW 0
+           354 : F800;  -- RED: 			DW &B1111100000000000
+           355 : 07E0;  -- GREEN: 			DW &B0000011111100000
+           356 : 001F;  -- BLUE: 			DW &B0000000000011111
+           357 : FFE0;  -- YELLOW:			DW &B1111111111100000
+           358 : 1111;  -- CYAN:			DW &H0000001111101111
+           359 : 0111;  -- PURPLE:			DW &H0011100000000111
+           35A : FFFF;  -- WHITE: 			DW &B1111111111111111
+           35B : AAAA;  -- ALT:			DW &B1010101010101010
+           35C : 1863;  -- DIM:			DW &B0001100001100011
+           35D : 00FF;  -- FULL_24:		DW &B0000000011111111
+           35E : 3800;  -- DIM_RED:		DW &B0011100000000000
+           35F : 00E0;  -- DIM_GREEN:		DW &B0000000011100000
+           360 : 0007;  -- DIM_BLUE:		DW &B0000000000000111
+           361 : 38E0;  -- DIM_YELLOW:		DW &B0011100011100000
+           362 : 0111;  -- DIM_CYAN:		DW &H0000000011100111
+           363 : 0000;  -- STORE_GREEN:	DW &B00000000
+           364 : 0000;  -- STORE_RED:		DW &B00000000
+           365 : 0000;  -- STORE_BLUE:		DW &B00000000
+           366 : 0000;  -- STORE_RB:		DW &B0000000000000000
+  END;
